@@ -25,7 +25,7 @@ Build:
   tasks:
     - clean
     - script: |
-        #!/usr/bin/env bash
+        #!/usr/env/bin bash
         set -e
         docker-compose -f test/docker-compose.yml up --exit-code-from tests
   final-tasks:
@@ -38,7 +38,7 @@ Release:
   tasks:
     - clean
     - script: |
-        #!/usr/bin/env bash
+        #!/usr/env/bin bash
         set -e
         /opt/scripts/git/git-repository-information-restore.sh
         docker run -e http_proxy=${bamboo.http_proxy} -e https_proxy=${bamboo.http_proxy} -e HTTP_PROXY=${bamboo.http_proxy} -e HTTPS_PROXY=${bamboo.http_proxy} -e GIT_REPO=${bamboo_repository_git_repositoryUrl} -e RELEASE_VERSION=${bamboo.release_version} acd-docker.repository.milieuinfo.be/milieuinfo/wc-release:1.0.0
@@ -50,7 +50,7 @@ Release:
 ---
 version: 2
 plan:
-  key: WEBCO-VLUIHTTPERRORMESSAGE
+  key: VLUIHTTPERRORMESSAGE
 
 plan-permissions:
   - groups:

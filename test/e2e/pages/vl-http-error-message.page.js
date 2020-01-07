@@ -6,8 +6,9 @@ class VlHttpErrorMessagePage extends Page {
         return new VlHttpErrorMessage(this.driver, selector);
     }
 
-    async getNotFoundMessage() {
-        return await this._getHttpErrorMessage('#not-found-message');
+    async clickOnButton() {
+        const errorMessage = await this._getHttpErrorMessage('#not-found-message');
+        return (await errorMessage.getActionButton()).click();
     }
 
     async load() {

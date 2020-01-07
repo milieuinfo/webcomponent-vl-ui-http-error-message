@@ -1,13 +1,18 @@
 const { VlElement } = require('vl-ui-core');
+const { VlTypography } = require('vl-ui-typography');
 const { By } = require('selenium-webdriver');
 
 class VlHttpErrorMessage extends VlElement {
-    async clickOnButton() {
-        const button = await this._getActionButton();
-        return button.click();
+    async getTitle() {
+        return this.shadowRoot.findElement(By.css('#title'));
     }
 
-    async _getActionButton() {
+    async getContent() {
+        const typo = new VlTypography(this.driver, this.shadowRoot.findElement(By.css('#text')));
+        return typo.getText();
+    }
+
+    async getActionButton() {
         return this.shadowRoot.findElement(By.css('button'));
     }
 }

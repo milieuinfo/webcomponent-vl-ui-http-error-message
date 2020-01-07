@@ -9,12 +9,10 @@ describe('vl-proza-message', async () => {
     });
 
     it('klikken op de actieknop van een 404 bericht zal de gebruiker omleiden naar de startpagina', async () => {
-        const message = await vlProzaMessagePage.getNotFoundMessage();
-
         const originalUrl = await driver.getCurrentUrl();
         assert.isFalse(originalUrl.endsWith('/'));
 
-        await message.clickOnButton();
+        await vlProzaMessagePage.clickOnButton();
 
         const urlAfterClick = await driver.getCurrentUrl();
         assert.isTrue(urlAfterClick.endsWith('/'));
