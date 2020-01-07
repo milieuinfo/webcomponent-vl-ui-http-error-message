@@ -43,8 +43,7 @@
     "vl-ui-core": "^2.2.9",
     "vl-ui-grid": "^1.1.0",
     "vl-ui-titles": "^1.0.13",
-    "vl-ui-typography": "^1.0.2",
-    "vl-ui-util": "^3.2.2"
+    "vl-ui-typography": "^1.0.2"
   },
   "peerDependencies": {
     "vl-ui-util": "^3.2.2",
