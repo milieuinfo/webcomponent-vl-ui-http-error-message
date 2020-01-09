@@ -1,6 +1,6 @@
 {
   "name": "vl-ui-http-error-message",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Toont een HTTP foutmelding aan de gebruiker op een gebruiksvriendelijke manier.",
   "scripts": {
     "prepare": "npm update --dev vl-ui-util && npm run prepare:util",
