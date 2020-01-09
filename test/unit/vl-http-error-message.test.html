@@ -58,7 +58,10 @@
 
         shadowRoot.querySelector('#title').textContent.should.equal('Oeps, die pagina vonden we niet terug');
         shadowRoot.querySelector('#text').textContent.should.equal('De pagina die u zoekt, vonden we niet terug.');
-        shadowRoot.querySelector('#actions button').textContent.should.equal('Terug naar de startpagina');
+
+        const action = shadowRoot.querySelector('#actions a');
+        action.getAttribute('href').should.equal('/');
+        action.textContent.should.equal('Terug naar de startpagina');
 
         const smallImage = shadowRoot.querySelector('#image-small');
         smallImage.getAttribute('src').should.equal('https://cdn.milieuinfo.be/http-error-message-assets/LATEST/img/page-not-found.svg');

@@ -13,7 +13,7 @@ class VlHttpErrorMessage extends VlElement {
     }
 
     async getActionButton() {
-        return this.shadowRoot.findElement(By.css('button'));
+        return this.shadowRoot.findElement(By.css('a'));
     }
 }
 

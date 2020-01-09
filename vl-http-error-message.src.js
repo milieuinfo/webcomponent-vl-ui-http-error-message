@@ -59,7 +59,7 @@ export class VlHttpErrorMessage extends VlElement(HTMLElement) {
                     <div class="vl-u-display-flex vl-u-flex-align-center vl-u-flex-v-center">
                         <img id="image-normal"/>
                     </div>
-                </div>                
+                </div>
             </div>
         `);
 
@@ -201,7 +201,7 @@ define('vl-http-404-message', class extends VlHttpErrorMessage {
             image: 'https://cdn.milieuinfo.be/http-error-message-assets/LATEST/img/page-not-found.svg',
             imageAlt: 'Pagina niet gevonden',
             text: `<p>De pagina die u zoekt, vonden we niet terug.</p>`,
-            actions: `<button is="vl-button" type="button" onclick="window.location.href = '/';">Terug naar de startpagina</button>`
+            actions: `<a is="vl-link-button" href="/">Terug naar de startpagina</a>`
         });
     }
 });
