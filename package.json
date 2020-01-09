@@ -17,14 +17,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/milieuinfo/webcomponent-vl-http-error-message.git"
+    "url": "git+https://github.com/milieuinfo/webcomponent-vl-ui-http-error-message.git"
   },
   "author": "DIDM",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/milieuinfo/webcomponent-vl-http-error-message/issues"
+    "url": "https://github.com/milieuinfo/webcomponent-vl-ui-http-error-message/issues"
   },
-  "homepage": "https://github.com/milieuinfo/webcomponent-vl-http-error-message#readme",
+  "homepage": "https://github.com/milieuinfo/webcomponent-vl-ui-http-error-message#readme",
   "dependencies": {
     "vl-ui-core": "^2.0.0"
   },
