@@ -37,6 +37,4 @@ describe('vl-proza-message', async () => {
     	const urlAfterClick = await driver.getCurrentUrl();
     	assert.isTrue(urlAfterClick.endsWith('/'));
     });
-    
-
 });

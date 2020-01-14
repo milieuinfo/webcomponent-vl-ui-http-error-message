@@ -38,7 +38,7 @@ class VlHttpErrorMessage extends VlElement {
     async getContent() {
     	const textElement = await this.shadowRoot.findElement(By.css('#text'));
     	const typography = await new VlTypography(this.driver, textElement);
-        return typography.getText();
+        return typography.getInnerHTML();
     }
 
     async clickOnLink() {
