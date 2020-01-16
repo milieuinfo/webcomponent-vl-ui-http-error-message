@@ -6,10 +6,10 @@ class VlHttpErrorMessagePage extends Page {
         return new VlHttpErrorMessage(this.driver, selector);
     }
 
-    async getNotFoundMessage() {
-    	return this._getHttpErrorMessage('#not-found-message');
+    async getNotFoundErrorMessage() {
+        return this._getHttpErrorMessage('#not-found-message');
     }
-    
+
     async getCustomErrorMessage() {
     	return this._getHttpErrorMessage('#custom-message');
     }
