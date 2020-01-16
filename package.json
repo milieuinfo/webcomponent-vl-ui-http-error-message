@@ -38,10 +38,10 @@
   "homepage": "https://github.com/milieuinfo/webcomponent-vl-ui-http-error-message#readme",
   "dependencies": {
     "vl-ui-button": "^2.0.0",
-    "vl-ui-core": "^3.0.1",
+    "vl-ui-core": "^3.1.1",
     "vl-ui-grid": "^1.1.0",
     "vl-ui-titles": "^1.0.13",
-    "vl-ui-typography": "^1.0.4"
+    "vl-ui-typography": "^1.0.5"
   },
   "peerDependencies": {
     "vl-ui-core": "^3.0.1",
@@ -52,13 +52,7 @@
   },
   "devDependencies": {
     "@govflanders/vl-ui-util": "^3.9.1",
-    "http-server": "0.11.1",
-    "np": "3.0.4",
-    "replace": "^1.1.1",
-    "uglify-js-es6": "2.8.9",
-    "vl-ui-util": "^3.2.5",
-    "wct-browser-legacy": "1.0.2",
-    "web-component-tester": "6.9.2"
+    "vl-ui-util": "^3.4.2"
   },
   "publishConfig": {
     "registry": "http://artifactory-pr-build.lb.cumuli.be:8081/artifactory/api/npm/acd-npm/"

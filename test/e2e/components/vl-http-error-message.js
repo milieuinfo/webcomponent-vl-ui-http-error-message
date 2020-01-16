@@ -9,7 +9,8 @@ class VlHttpErrorMessage extends VlElement {
     }
 
     async getContent() {
-        const typo = new VlTypography(this.driver, this.shadowRoot.findElement(By.css('#text')));
+        const element = await this.shadowRoot.findElement(By.css('#text'));
+        const typo = await new VlTypography(this.driver, element);
         return typo.getText();
     }
 
