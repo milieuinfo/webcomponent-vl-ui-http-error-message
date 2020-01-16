@@ -1,38 +1,44 @@
 const { assert, driver } = require('vl-ui-core').Test;
 const VlHttpErrorMessagePage = require('./pages/vl-http-error-message.page');
 
-describe('vl-proza-message', async () => {
+describe('vl-http-error-message', async () => {
     const vlHttpErrorMessagePage = new VlHttpErrorMessagePage(driver);
 
     before(() => {
         return vlHttpErrorMessagePage.load();
     });
 
-    it('kan de teksten opvragen van de http error message', async () => {
+    it('als gebruiker kan ik de foutmelding titel lezen', async () => {
     	const httpErrorMessage = await vlHttpErrorMessagePage.getCustomErrorMessage();
-    	
-    	const title = await httpErrorMessage.getTitle();
-    	assert.equal(title, "Niets gevonden hiervoor.");
-    	
-    	const content = await httpErrorMessage.getContent();
-    	assert.equal(content, '<p slot="text">Sorry, er liep iets onverwachts mis.</p>');
-
-    	const linkText = await httpErrorMessage.getLinkText();
-    	assert.equal(linkText, "Opnieuw opstarten");
-
-    	const imageSource = await httpErrorMessage.getImageSource();
-    	assert.equal(imageSource, "http://localhost:8080/demo/error-404.png");
-
-    	const imageAlt = await httpErrorMessage.getImageAlt();
-    	assert.equal(imageAlt, "Niets gevonden");
+    	assert.eventually.equal(httpErrorMessage.getTitle(), "Niets gevonden hiervoor.");
     });
 
-    it('klikken op de actieknop van een 404 bericht zal de gebruiker omleiden naar de startpagina', async () => {
+    it('als gebruiker kan ik de foutmelding content lezen', async () => {
+		const httpErrorMessage = await vlHttpErrorMessagePage.getCustomErrorMessage();
+		const typography = await httpErrorMessage._getTypography();
+		assert.eventually.equal(httpErrorMessage.getContent(), 'Sorry, er liep iets onverwachts mis.');
+    	assert.eventually.equal(typography.getInnerHTML(), '<p slot="text">Sorry, er liep iets onverwachts mis.</p>');
+    });
+
+    it('als gebruiker kan ik de foutmelding link zien', async () => {
+		const httpErrorMessage = await vlHttpErrorMessagePage.getCustomErrorMessage();
+		const link = await httpErrorMessage._getAction();
+    	assert.eventually.equal(link.getText(), "Opnieuw opstarten");
+    });
+
+    it('als gebruiker kan ik de foutmelding afbeelding zien', async () => {
+    	const httpErrorMessage = await vlHttpErrorMessagePage.getCustomErrorMessage();
+		const image = await httpErrorMessage._getImage();
+    	assert.eventually.equal(image.getAttribute('src'), "http://localhost:8080/demo/error-404.png");
+    	assert.eventually.equal(image.getAttribute('alt'), "Niets gevonden");
+    });
+
+    it('als gebruiker kan ik op de actieknop van een 404 foutmelding klikken om naar de startpagina te gaan', async () => {
     	const originalUrl = await driver.getCurrentUrl();
     	assert.isFalse(originalUrl.endsWith('/'));
     	
     	const httpErrorMessage = await vlHttpErrorMessagePage.getNotFoundMessage();
-    	await httpErrorMessage.clickOnLink();
+    	await httpErrorMessage.clickOnAction();
     	
     	const urlAfterClick = await driver.getCurrentUrl();
     	assert.isTrue(urlAfterClick.endsWith('/'));
