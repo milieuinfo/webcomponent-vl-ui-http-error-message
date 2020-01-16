@@ -4,7 +4,8 @@ const { By } = require('selenium-webdriver');
 
 class VlHttpErrorMessage extends VlElement {
     async getTitle() {
-        return this.shadowRoot.findElement(By.css('#title'));
+        const title = await this.shadowRoot.findElement(By.css('#title'));
+        return title.getText();
     }
 
     async getContent() {
