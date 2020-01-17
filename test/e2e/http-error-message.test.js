@@ -42,7 +42,7 @@ describe('vl-http-error-message', async () => {
 
         httpErrorMessage = await vlHttpErrorMessagePage.getCustomErrorMessage();
         image = await httpErrorMessage._getImage();
-        await assert.eventually.equal(image.getAttribute('src'), 'http://localhost:8080/demo/error-404.png');
+        assert.isTrue((await image.getAttribute('src')).endsWith('demo/error-404.png'));
         await assert.eventually.equal(image.getAttribute('alt'), 'Niets gevonden');
     });
 
