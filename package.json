@@ -39,15 +39,15 @@
   "dependencies": {
     "vl-ui-button": "^2.0.1",
     "vl-ui-titles": "^1.0.13",
-    "vl-ui-typography": "^1.0.6",
-    "vl-ui-core": "^3.0.1",
+    "vl-ui-typography": "^1.0.7",
+    "vl-ui-core": "^3.1.1",
     "vl-ui-grid": "^1.1.0"
   },
   "peerDependencies": {
     "vl-ui-button": "^2.0.1",
     "vl-ui-titles": "^1.0.13",
-    "vl-ui-typography": "^1.0.6",
-    "vl-ui-core": "^3.0.1",
+    "vl-ui-typography": "^1.0.7",
+    "vl-ui-core": "^3.1.1",
     "vl-ui-grid": "^1.1.0"
   },
   "devDependencies": {
