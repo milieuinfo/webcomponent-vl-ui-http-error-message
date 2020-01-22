@@ -59,6 +59,6 @@ describe('vl-http-error-message', async () => {
         await httpErrorMessage.clickOnAction();
         urlAfterClick = await driver.getCurrentUrl();
         assert.isTrue(urlAfterClick.endsWith('#demo'));
-        await vlHttpErrorMessagePage.load();
+        return vlHttpErrorMessagePage.load();
     });
 });
