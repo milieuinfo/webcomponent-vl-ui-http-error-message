@@ -60,14 +60,14 @@
   },
   "dependencies": {
     "vl-ui-core": "^4.0.0",
-    "vl-ui-button": "^2.0.0",
+    "vl-ui-button": "^3.0.0",
     "vl-ui-titles": "^2.0.0",
     "vl-ui-typography": "^2.0.0",
     "vl-ui-grid": "^2.0.0"
   },
   "peerDependencies": {
     "vl-ui-core": "^4.0.0",
-    "vl-ui-button": "^2.0.0",
+    "vl-ui-button": "^3.0.0",
     "vl-ui-titles": "^2.0.0",
     "vl-ui-typography": "^2.0.0",
     "vl-ui-grid": "^2.0.0"
