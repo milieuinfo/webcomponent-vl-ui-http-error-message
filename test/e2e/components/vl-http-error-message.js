@@ -1,5 +1,5 @@
-const { VlElement } = require('vl-ui-core');
-const { VlTypography } = require('vl-ui-typography');
+const { VlElement } = require('vl-ui-core').Test;
+const { VlTypography } = require('vl-ui-typography').Test;
 const { VlButton } = require('vl-ui-button');
 const { By } = require('selenium-webdriver');
 

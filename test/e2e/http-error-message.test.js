@@ -1,4 +1,4 @@
-const { assert, driver } = require('vl-ui-core').Test;
+const { assert, driver } = require('vl-ui-core').Test.Setup;
 const VlHttpErrorMessagePage = require('./pages/vl-http-error-message.page');
 
 describe('vl-http-error-message', async () => {
