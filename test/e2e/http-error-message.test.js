@@ -4,7 +4,7 @@ const VlHttpErrorMessagePage = require('./pages/vl-http-error-message.page');
 describe('vl-http-error-message', async () => {
     const vlHttpErrorMessagePage = new VlHttpErrorMessagePage(driver);
 
-    before(() => {
+    beforeEach(() => {
         return vlHttpErrorMessagePage.load();
     });
 
@@ -59,6 +59,5 @@ describe('vl-http-error-message', async () => {
         await httpErrorMessage.clickOnAction();
         urlAfterClick = await driver.getCurrentUrl();
         assert.isTrue(urlAfterClick.endsWith('#demo'));
-        return vlHttpErrorMessagePage.load();
     });
 });
