@@ -6,7 +6,7 @@
   <script src="../../node_modules/@webcomponents/webcomponentsjs/webcomponents-lite.js"></script>
   <script src="../../node_modules/web-component-tester/browser.js"></script>
 
-  <script type="module" src="../../src/vl-http-error-message.src.js"></script>
+  <script type="module" src="../../src/vl-http-error-message.js"></script>
 </head>
 
 <body>
@@ -26,7 +26,7 @@
   </test-fixture>
 
   <script type="module">
-    import { awaitUntil } from 'vl-ui-core/vl-core';
+    import { awaitUntil } from 'vl-ui-core/dist/vl-core';
 
     suite('vl-http-error-message', () => {
       const should = chai.should();

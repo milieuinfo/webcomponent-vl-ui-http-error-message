@@ -1,3 +1,3 @@
 module.exports = { 
-    VlHttpErrorMessage: require('../vl-http-error-message.src.js').VlHttpErrorMessage,
+    VlHttpErrorMessage: require('../dist/vl-http-error-message.src.js').VlHttpErrorMessage,
 }
