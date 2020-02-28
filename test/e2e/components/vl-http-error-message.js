@@ -32,7 +32,7 @@ class VlHttpErrorMessage extends VlElement {
         return new VlButton(this.driver, element);
     }
 
-    async _getImage() {
+    async getImage() {
         const smallImage = await this._getSmallImage();
         const normalImage = await this._getNormalImage();
         const smallImageSrc = await smallImage.getAttribute('src');

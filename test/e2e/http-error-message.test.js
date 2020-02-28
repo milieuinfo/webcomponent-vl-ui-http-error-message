@@ -36,12 +36,12 @@ describe('vl-http-error-message', async () => {
 
     it('als gebruiker kan ik de foutmelding afbeelding zien', async () => {
         let httpErrorMessage = await vlHttpErrorMessagePage.getNotFoundErrorMessage();
-        let image = await httpErrorMessage._getImage();
+        let image = await httpErrorMessage.getImage();
         await assert.eventually.equal(image.getAttribute('src'), 'https://cdn.milieuinfo.be/http-error-message-assets/LATEST/img/page-not-found.svg');
         await assert.eventually.equal(image.getAttribute('alt'), 'Pagina niet gevonden');
 
         httpErrorMessage = await vlHttpErrorMessagePage.getCustomErrorMessage();
-        image = await httpErrorMessage._getImage();
+        image = await httpErrorMessage.getImage();
         assert.isTrue((await image.getAttribute('src')).endsWith('demo/error-404.png'));
         await assert.eventually.equal(image.getAttribute('alt'), 'Niets gevonden');
     });
