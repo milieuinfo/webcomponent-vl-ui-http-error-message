@@ -45,14 +45,14 @@
   },
   "dependencies": {
     "vl-ui-core": "^5.0.1",
-    "vl-ui-button": "^4.0.0",
+    "vl-ui-button": "^5.0.0",
     "vl-ui-titles": "^3.0.0",
     "vl-ui-typography": "^3.0.0",
     "vl-ui-grid": "^3.0.0"
   },
   "peerDependencies": {
     "vl-ui-core": "^5.0.1",
-    "vl-ui-button": "^4.0.0",
+    "vl-ui-button": "^5.0.0",
     "vl-ui-titles": "^3.0.0",
     "vl-ui-typography": "^3.0.0",
     "vl-ui-grid": "^3.0.0"
