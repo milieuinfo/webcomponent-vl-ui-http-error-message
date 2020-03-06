@@ -1,6 +1,7 @@
 const { VlElement } = require('vl-ui-core').Test;
 const { VlTypography } = require('vl-ui-typography').Test;
 const { VlButton } = require('vl-ui-button').Test;
+
 const { By } = require('selenium-webdriver');
 
 class VlHttpErrorMessage extends VlElement {
@@ -30,7 +31,7 @@ class VlHttpErrorMessage extends VlElement {
         return new VlButton(this.driver, element);
     }
 
-    async _getImage() {
+    async getImage() {
         const smallImage = await this._getSmallImage();
         const normalImage = await this._getNormalImage();
         const smallImageSrc = await smallImage.getAttribute('src');
@@ -47,11 +48,11 @@ class VlHttpErrorMessage extends VlElement {
     }
 
     async _getNormalImage() {
-        return this.shadowRoot.findElement(By.css('#image-normal'));
+        return new VlElement(this.driver, await this.shadowRoot.findElement(By.css('#image-normal')));
     }
 
     async _getSmallImage() {
-        return this.shadowRoot.findElement(By.css('#image-small'));
+        return new VlElement(this.driver, await this.shadowRoot.findElement(By.css('#image-small')));
     }
 }
 
