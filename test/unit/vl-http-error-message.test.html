@@ -25,81 +25,145 @@
     </template>
   </test-fixture>
 
+  <test-fixture id="vl-http-500-message-fixture">
+    <template>
+      <vl-http-500-message></vl-http-500-message>
+    </template>
+  </test-fixture>
+
   <script type="module">
     import { awaitUntil } from 'vl-ui-core/dist/vl-core';
+    const sandbox = sinon.sandbox.create();
+
+    teardown(() => {
+      sandbox.restore();
+    });
+
+    const assertWithElements = (fixture, assert) => {
+      const message = fixture;
+      const shadowRoot = message.shadowRoot;
+      const title = shadowRoot.querySelector('#title');
+      const text = shadowRoot.querySelector('#text');
+      const actions = shadowRoot.querySelector('#actions');
+      const action = actions.querySelector('a');
+      const smallImage = shadowRoot.querySelector('#image-small');
+      const normalImage = shadowRoot.querySelector('#image-normal');
+      assert({
+        message: message,
+        title: title,
+        text: text,
+        actions: actions,
+        action: action,
+        smallImage: smallImage,
+        normalImage: normalImage
+      });
+    };
+
+    const assertConfig = (fixture) => {
+      const message = fixture;
+      message.dataset.vlTitle = 'Foo';
+      message.dataset.vlImage = 'Bar';
+      message.dataset.vlImageAlt = 'foobar';
+
+      const textSlot = document.createElement('div');
+      textSlot.slot = 'text';
+      textSlot.textContent = 'hello world';
+      message.appendChild(textSlot);
+
+      const actionsSlot = document.createElement('div');
+      actionsSlot.slot = 'actions';
+      actionsSlot.textContent = 'moo';
+      message.appendChild(actionsSlot);
+
+      const shadowRoot = message.shadowRoot;
+      const smallImage = shadowRoot.querySelector('#image-small');
+      const normalImage = shadowRoot.querySelector('#image-normal');
+
+      return awaitUntil(() => {
+        return shadowRoot.querySelector('#title').textContent === 'Foo' &&
+          shadowRoot.querySelector('#text').textContent === 'hello world' &&
+          shadowRoot.querySelector('#actions').textContent === 'moo' &&
+          smallImage.getAttribute('src') === 'Bar' &&
+          smallImage.alt === 'foobar' &&
+          normalImage.getAttribute('src') === 'Bar' &&
+          normalImage.alt === 'foobar'
+      });
+    }
 
     suite('vl-http-error-message', () => {
       const should = chai.should();
 
-      test('Een vl-http-error-message toont alle geconfigureerde tekst, afbeeldingen en acties', () => {
-        const message = fixture('vl-http-error-message-fixture');
-        const shadowRoot = message.shadowRoot;
+      test('toont alle geconfigureerde tekst, afbeeldingen en acties', () => {
+        assertWithElements(fixture('vl-http-error-message-fixture'), ({ title, text, actions, smallImage, normalImage }) => {
+          title.textContent.should.equal('Titel');
+          text.textContent.should.equal('Beschrijving');
+          actions.textContent.should.equal('Knopjes');
 
-        shadowRoot.querySelector('#title').textContent.should.equal('Titel');
-        shadowRoot.querySelector('#text').textContent.should.equal('Beschrijving');
-        shadowRoot.querySelector('#actions').textContent.should.equal('Knopjes');
+          smallImage.getAttribute('src').should.equal('afbeelding-url');
+          smallImage.alt.should.equal('afbeelding-alt');
 
-        const smallImage = shadowRoot.querySelector('#image-small');
-        smallImage.getAttribute('src').should.equal('afbeelding-url');
-        smallImage.alt.should.equal('afbeelding-alt');
-
-        const normalImage = shadowRoot.querySelector('#image-normal');
-        normalImage.getAttribute('src').should.equal('afbeelding-url');
-        normalImage.alt.should.equal('afbeelding-alt');
+          normalImage.getAttribute('src').should.equal('afbeelding-url');
+          normalImage.alt.should.equal('afbeelding-alt');
+        });
       });
     });
 
     suite('vl-http-404-message', () => {
       const should = chai.should();
 
-      test('Een vl-http-404-message configureert de juiste tekst, afbeeldingen en acties by default', () => {
-        const message = fixture('vl-http-404-message-fixture');
-        const shadowRoot = message.shadowRoot;
+      test('configureert de juiste tekst, afbeeldingen en acties by default', () => {
+        assertWithElements(fixture('vl-http-404-message-fixture'), ({ title, text, action, smallImage, normalImage }) => {
+          title.textContent.should.equal('Oeps, die pagina vonden we niet terug');
+          text.textContent.should.equal('De pagina die u zoekt, vonden we niet terug.');
 
-        shadowRoot.querySelector('#title').textContent.should.equal('Oeps, die pagina vonden we niet terug');
-        shadowRoot.querySelector('#text').textContent.should.equal('De pagina die u zoekt, vonden we niet terug.');
+          action.getAttribute('href').should.equal('/');
+          action.textContent.should.equal('Terug naar de startpagina');
 
-        const action = shadowRoot.querySelector('#actions a');
-        action.getAttribute('href').should.equal('/');
-        action.textContent.should.equal('Terug naar de startpagina');
+          smallImage.getAttribute('src').should.equal('https://cdn.milieuinfo.be/http-error-message-assets/LATEST/img/page-not-found.svg');
+          smallImage.alt.should.equal('Pagina niet gevonden');
 
-        const smallImage = shadowRoot.querySelector('#image-small');
-        smallImage.getAttribute('src').should.equal('https://cdn.milieuinfo.be/http-error-message-assets/LATEST/img/page-not-found.svg');
-        smallImage.alt.should.equal('Pagina niet gevonden');
-
-        const normalImage = shadowRoot.querySelector('#image-normal');
-        normalImage.getAttribute('src').should.equal('https://cdn.milieuinfo.be/http-error-message-assets/LATEST/img/page-not-found.svg');
-        normalImage.alt.should.equal('Pagina niet gevonden');
+          normalImage.getAttribute('src').should.equal('https://cdn.milieuinfo.be/http-error-message-assets/LATEST/img/page-not-found.svg');
+          normalImage.alt.should.equal('Pagina niet gevonden');
+        });
       });
 
-      test('Een vl-http-404-message configureert de juiste tekst, afbeeldingen en acties na overschrijving van de default waarden', () => {
-        const message = fixture('vl-http-404-message-fixture');
-        message.dataset.vlTitle = 'Foo';
-        message.dataset.vlImage = 'Bar';
-        message.dataset.vlImageAlt = 'foobar';
+      test('configureert de juiste tekst, afbeeldingen en acties na overschrijving van de default waarden', () => {
+        assertConfig(fixture('vl-http-404-message-fixture'));
+      });
+    });
 
-        const textSlot = document.createElement('div');
-        textSlot.slot = 'text';
-        textSlot.textContent = 'hello world';
-        message.appendChild(textSlot);
+    suite('vl-http-500-message', () => {
+      const should = chai.should();
 
-        const actionsSlot = document.createElement('div');
-        actionsSlot.slot = 'actions';
-        actionsSlot.textContent = 'moo';
-        message.appendChild(actionsSlot);
+      test('configureert de juiste tekst, afbeeldingen en acties by default', () => {
+        assertWithElements(fixture('vl-http-500-message-fixture'), ({ title, text, action, smallImage, normalImage }) => {
+          title.textContent.should.equal('Oeps, er is iets fout gelopen');
+          text.textContent.should.equal('De actie die u heeft uitgevoerd is fout gelopen. Gelieve opnieuw te proberen.');
 
-        const shadowRoot = message.shadowRoot;
-        const smallImage = shadowRoot.querySelector('#image-small');
-        const normalImage = shadowRoot.querySelector('#image-normal');
+          action.hasAttribute('href').should.to.be.false;
+          action.textContent.should.equal('Terug naar de pagina');
 
-        return awaitUntil(() => shadowRoot.querySelector('#title').textContent === 'Foo' &&
-            shadowRoot.querySelector('#text').textContent === 'hello world' &&
-            shadowRoot.querySelector('#actions').textContent === 'moo' &&
-            smallImage.getAttribute('src') === 'Bar' &&
-            smallImage.alt === 'foobar' &&
-            normalImage.getAttribute('src') === 'Bar' &&
-            normalImage.alt === 'foobar'
-        );
+          smallImage.getAttribute('src').should.equal('https://cdn.milieuinfo.be/http-error-message-assets/LATEST/img/unexpected-error.svg');
+          smallImage.alt.should.equal('Onverwachte fout');
+
+          smallImage.getAttribute('src').should.equal('https://cdn.milieuinfo.be/http-error-message-assets/LATEST/img/unexpected-error.svg');
+          normalImage.alt.should.equal('Onverwachte fout');
+        });
+      });
+
+      test('configureert de juiste tekst, afbeeldingen en acties na overschrijving van de default waarden', () => {
+        assertConfig(fixture('vl-http-500-message-fixture'));
+      });
+
+      test('een klik op de actie knop zal naar de vorige pagina gaan', (done) => {
+        assertWithElements(fixture('vl-http-500-message-fixture'), ({ action }) => {
+          sandbox.stub(window.history, 'back');
+          action.addEventListener('click', () => {
+            assert(window.history.back.called);
+            done();
+          });
+          action.click();
+        });
       });
     });
   </script>
