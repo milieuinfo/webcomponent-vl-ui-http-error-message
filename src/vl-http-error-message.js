@@ -128,7 +128,7 @@ export class VlHttpErrorMessage extends VlElement(HTMLElement) {
     }
 
     get __actionElement() {
-        return this.__actionsElement.querySelector('a');
+        return this._element.querySelector('#actions > *');
     }
 
     get __imageForSmallScreensElement() {
