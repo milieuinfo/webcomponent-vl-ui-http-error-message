@@ -14,7 +14,7 @@
     <template>
       <vl-http-error-message data-vl-title="Titel" data-vl-image="afbeelding-url" data-vl-image-alt="afbeelding-alt">
         <p slot="text">Beschrijving</p>
-        <div slot="actions">Knopjes</div>
+        <div slot="actions">Knop</div>
       </vl-http-error-message>
     </template>
   </test-fixture>
@@ -28,6 +28,16 @@
   <test-fixture id="vl-http-500-message-fixture">
     <template>
       <vl-http-500-message></vl-http-500-message>
+    </template>
+  </test-fixture>
+
+  <test-fixture id="vl-http-500-message-slot-fixture">
+    <template>
+      <vl-http-500-message>
+        <div slot="actions">
+          <span>Knop</span>
+        </div>
+      </vl-http-500-message>
     </template>
   </test-fixture>
 
@@ -45,7 +55,7 @@
       const title = shadowRoot.querySelector('#title');
       const text = shadowRoot.querySelector('#text');
       const actions = shadowRoot.querySelector('#actions');
-      const action = actions.querySelector('a');
+      const action = shadowRoot.querySelector('#actions > *');
       const smallImage = shadowRoot.querySelector('#image-small');
       const normalImage = shadowRoot.querySelector('#image-normal');
       assert({
@@ -97,7 +107,7 @@
         assertWithElements(fixture('vl-http-error-message-fixture'), ({ title, text, actions, smallImage, normalImage }) => {
           title.textContent.should.equal('Titel');
           text.textContent.should.equal('Beschrijving');
-          actions.textContent.should.equal('Knopjes');
+          actions.innerText.should.equal('Knop');
 
           smallImage.getAttribute('src').should.equal('afbeelding-url');
           smallImage.alt.should.equal('afbeelding-alt');
@@ -116,8 +126,9 @@
           title.textContent.should.equal('Oeps, die pagina vonden we niet terug');
           text.textContent.should.equal('De pagina die u zoekt, vonden we niet terug.');
 
-          action.getAttribute('href').should.equal('/');
-          action.textContent.should.equal('Terug naar de startpagina');
+          const link = action.querySelector('a');
+          link.getAttribute('href').should.equal('/');
+          link.textContent.should.equal('Terug naar de startpagina');
 
           smallImage.getAttribute('src').should.equal('https://cdn.milieuinfo.be/http-error-message-assets/LATEST/img/page-not-found.svg');
           smallImage.alt.should.equal('Pagina niet gevonden');
@@ -156,13 +167,19 @@
       });
 
       test('een klik op de actie knop zal naar de vorige pagina gaan', (done) => {
-        assertWithElements(fixture('vl-http-500-message-fixture'), ({ action }) => {
-          sandbox.stub(window.history, 'back');
-          action.addEventListener('click', () => {
-            assert(window.history.back.called);
-            done();
+        const fixtures = [fixture('vl-http-500-message-fixture'), fixture('vl-http-500-message-slot-fixture')];
+        fixtures.forEach((fixture, index) => {
+          sandbox.restore();
+          assertWithElements(fixture, ({ action }) => {
+            sandbox.stub(window.history, 'back');
+            action.addEventListener('click', () => {
+              assert(window.history.back.called);
+              if ((index+1) == fixtures.length) {
+                done();
+              }
+            });
+            action.click();
           });
-          action.click();
         });
       });
     });
