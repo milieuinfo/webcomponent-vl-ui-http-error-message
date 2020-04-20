@@ -2,12 +2,12 @@ const VlHttpErrorMessage = require('../components/vl-http-error-message');
 const { Page, Config } = require('vl-ui-core').Test;
 
 class VlHttpErrorMessagePage extends Page {
-    async _getHttpErrorMessage(selector) {
-        return new VlHttpErrorMessage(this.driver, selector);
+    async get404() {
+        return this._getHttpErrorMessage('#error-404');
     }
 
-    async getNotFoundErrorMessage() {
-        return this._getHttpErrorMessage('#not-found-message');
+    async get500() {
+        return this._getHttpErrorMessage('#error-500');
     }
 
     async getCustomErrorMessage() {
@@ -16,6 +16,10 @@ class VlHttpErrorMessagePage extends Page {
     
     async load() {
         await super.load(Config.baseUrl + '/demo/vl-http-error-message.html');
+    }
+
+    async _getHttpErrorMessage(selector) {
+        return new VlHttpErrorMessage(this.driver, selector);
     }
 }
 
