@@ -42,7 +42,7 @@
   </test-fixture>
 
   <script type="module">
-    import { awaitUntil } from 'vl-ui-core/dist/vl-core';
+    import {awaitUntil} from 'vl-ui-core/dist/vl-core';
     const sandbox = sinon.sandbox.create();
 
     teardown(() => {
@@ -65,7 +65,7 @@
         actions: actions,
         action: action,
         smallImage: smallImage,
-        normalImage: normalImage
+        normalImage: normalImage,
       });
     };
 
@@ -96,15 +96,13 @@
           smallImage.getAttribute('src') === 'Bar' &&
           smallImage.alt === 'foobar' &&
           normalImage.getAttribute('src') === 'Bar' &&
-          normalImage.alt === 'foobar'
+          normalImage.alt === 'foobar';
       });
-    }
+    };
 
     suite('vl-http-error-message', () => {
-      const should = chai.should();
-
       test('toont alle geconfigureerde tekst, afbeeldingen en acties', () => {
-        assertWithElements(fixture('vl-http-error-message-fixture'), ({ title, text, actions, smallImage, normalImage }) => {
+        assertWithElements(fixture('vl-http-error-message-fixture'), ({title, text, actions, smallImage, normalImage}) => {
           title.textContent.should.equal('Titel');
           text.textContent.should.equal('Beschrijving');
           actions.innerText.should.equal('Knop');
@@ -119,10 +117,8 @@
     });
 
     suite('vl-http-404-message', () => {
-      const should = chai.should();
-
       test('configureert de juiste tekst, afbeeldingen en acties by default', () => {
-        assertWithElements(fixture('vl-http-404-message-fixture'), ({ title, text, action, smallImage, normalImage }) => {
+        assertWithElements(fixture('vl-http-404-message-fixture'), ({title, text, action, smallImage, normalImage}) => {
           title.textContent.should.equal('Oeps, die pagina vonden we niet terug');
           text.textContent.should.equal('De pagina die u zoekt, vonden we niet terug.');
 
@@ -144,10 +140,8 @@
     });
 
     suite('vl-http-500-message', () => {
-      const should = chai.should();
-
       test('configureert de juiste tekst, afbeeldingen en acties by default', () => {
-        assertWithElements(fixture('vl-http-500-message-fixture'), ({ title, text, action, smallImage, normalImage }) => {
+        assertWithElements(fixture('vl-http-500-message-fixture'), ({title, text, action, smallImage, normalImage}) => {
           title.textContent.should.equal('Oeps, er is iets fout gelopen');
           text.textContent.should.equal('De actie die u heeft uitgevoerd is fout gelopen. Gelieve opnieuw te proberen.');
 
@@ -170,7 +164,7 @@
         const fixtures = [fixture('vl-http-500-message-fixture'), fixture('vl-http-500-message-slot-fixture')];
         fixtures.forEach((fixture, index) => {
           sandbox.restore();
-          assertWithElements(fixture, ({ action }) => {
+          assertWithElements(fixture, ({action}) => {
             sandbox.stub(window.history, 'back');
             action.addEventListener('click', () => {
               assert(window.history.back.called);
