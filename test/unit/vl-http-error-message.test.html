@@ -43,7 +43,7 @@
 
   <script type="module">
     import {awaitUntil} from 'vl-ui-core/dist/vl-core';
-    const sandbox = sinon.sandbox.create();
+    const sandbox = sinon.createSandbox();
 
     teardown(() => {
       sandbox.restore();
