@@ -3,8 +3,8 @@
 
 <head>
   <meta charset="utf-8">
-  <script src="../../node_modules/@webcomponents/webcomponentsjs/webcomponents-lite.js"></script>
-  <script src="../../node_modules/web-component-tester/browser.js"></script>
+  <script src="../../../@webcomponents/webcomponentsjs/webcomponents-lite.js"></script>
+  <script src="../../../web-component-tester/browser.js"></script>
 
   <script type="module" src="../../src/vl-http-error-message.js"></script>
 </head>
@@ -103,15 +103,15 @@
     suite('vl-http-error-message', () => {
       test('toont alle geconfigureerde tekst, afbeeldingen en acties', () => {
         assertWithElements(fixture('vl-http-error-message-fixture'), ({title, text, actions, smallImage, normalImage}) => {
-          title.textContent.should.equal('Titel');
-          text.textContent.should.equal('Beschrijving');
-          actions.innerText.should.equal('Knop');
+          assert.equal(title.textContent, 'Titel');
+          assert.equal(text.textContent, 'Beschrijving');
+          assert.equal(actions.innerText, 'Knop');
 
-          smallImage.getAttribute('src').should.equal('afbeelding-url');
-          smallImage.alt.should.equal('afbeelding-alt');
+          assert(smallImage.getAttribute('src'), 'afbeelding-url');
+          assert(smallImage.alt, 'afbeelding-alt');
 
-          normalImage.getAttribute('src').should.equal('afbeelding-url');
-          normalImage.alt.should.equal('afbeelding-alt');
+          assert(normalImage.getAttribute('src'), 'afbeelding-url');
+          assert(normalImage.alt, 'afbeelding-alt');
         });
       });
     });
@@ -119,18 +119,18 @@
     suite('vl-http-404-message', () => {
       test('configureert de juiste tekst, afbeeldingen en acties by default', () => {
         assertWithElements(fixture('vl-http-404-message-fixture'), ({title, text, action, smallImage, normalImage}) => {
-          title.textContent.should.equal('Oeps, die pagina vonden we niet terug');
-          text.textContent.should.equal('De pagina die u zoekt, vonden we niet terug.');
+          assert.equal(title.textContent, 'Oeps, die pagina vonden we niet terug');
+          assert.equal(text.textContent, 'De pagina die u zoekt, vonden we niet terug.');
 
           const link = action.querySelector('a');
-          link.getAttribute('href').should.equal('/');
-          link.textContent.should.equal('Terug naar de startpagina');
+          assert.equal(link.getAttribute('href'), '/');
+          assert.equal(link.textContent, 'Terug naar de startpagina');
 
-          smallImage.getAttribute('src').should.equal('https://cdn.milieuinfo.be/http-error-message-assets/LATEST/img/page-not-found.svg');
-          smallImage.alt.should.equal('Pagina niet gevonden');
+          assert.equal(smallImage.getAttribute('src'), 'https://cdn.milieuinfo.be/http-error-message-assets/LATEST/img/page-not-found.svg');
+          assert.equal(smallImage.alt, 'Pagina niet gevonden');
 
-          normalImage.getAttribute('src').should.equal('https://cdn.milieuinfo.be/http-error-message-assets/LATEST/img/page-not-found.svg');
-          normalImage.alt.should.equal('Pagina niet gevonden');
+          assert.equal(normalImage.getAttribute('src'), 'https://cdn.milieuinfo.be/http-error-message-assets/LATEST/img/page-not-found.svg');
+          assert.equal(normalImage.alt, 'Pagina niet gevonden');
         });
       });
 
@@ -142,17 +142,17 @@
     suite('vl-http-500-message', () => {
       test('configureert de juiste tekst, afbeeldingen en acties by default', () => {
         assertWithElements(fixture('vl-http-500-message-fixture'), ({title, text, action, smallImage, normalImage}) => {
-          title.textContent.should.equal('Oeps, er is iets fout gelopen');
-          text.textContent.should.equal('De actie die u heeft uitgevoerd is fout gelopen. Gelieve opnieuw te proberen.');
+          assert.equal(title.textContent, 'Oeps, er is iets fout gelopen');
+          assert.equal(text.textContent, 'De actie die u heeft uitgevoerd is fout gelopen. Gelieve opnieuw te proberen.');
 
-          action.hasAttribute('href').should.to.be.false;
-          action.textContent.should.equal('Terug naar de pagina');
+          assert.isFalse(action.hasAttribute('href'));
+          assert.equal(action.textContent, 'Terug naar de pagina');
 
-          smallImage.getAttribute('src').should.equal('https://cdn.milieuinfo.be/http-error-message-assets/LATEST/img/unexpected-error.svg');
-          smallImage.alt.should.equal('Onverwachte fout');
+          assert.equal(smallImage.getAttribute('src'), 'https://cdn.milieuinfo.be/http-error-message-assets/LATEST/img/unexpected-error.svg');
+          assert.equal(smallImage.alt, 'Onverwachte fout');
 
-          smallImage.getAttribute('src').should.equal('https://cdn.milieuinfo.be/http-error-message-assets/LATEST/img/unexpected-error.svg');
-          normalImage.alt.should.equal('Onverwachte fout');
+          assert.equal(normalImage.getAttribute('src'), 'https://cdn.milieuinfo.be/http-error-message-assets/LATEST/img/unexpected-error.svg');
+          assert.equal(normalImage.alt, 'Onverwachte fout');
         });
       });
 
