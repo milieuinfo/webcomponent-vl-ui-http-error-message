@@ -36,7 +36,7 @@ export class VlHttpErrorMessage extends vlElement(HTMLElement) {
   constructor(defaults) {
     super(`
         <style>
-            @import /node_modules/vl-ui-http-error-message/dist/style.css;
+            @import '/node_modules/vl-ui-http-error-message/dist/style.css';
             @import '/node_modules/vl-ui-grid/dist/style.css';
             @import '/node_modules/vl-ui-titles/dist/style.css';
             @import '/node_modules/vl-ui-button/dist/style.css';

@@ -1,8 +1,8 @@
-import {vlElement, define} from vl-ui-core;
-import vl-ui-grid;
-import vl-ui-titles;
-import vl-ui-typography;
-import vl-ui-button;
+import {vlElement, define} from 'vl-ui-core';
+import 'vl-ui-grid';
+import 'vl-ui-titles';
+import 'vl-ui-typography';
+import 'vl-ui-button';
 
 /**
  * VlHttpErrorMessage
