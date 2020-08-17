@@ -1,8 +1,7 @@
 const {VlElement} = require('vl-ui-core').Test;
+const {By} = require('vl-ui-core').Test.Setup;
 const {VlTypography} = require('vl-ui-typography').Test;
 const {VlButton} = require('vl-ui-button').Test;
-
-const {By} = require('selenium-webdriver');
 
 class VlHttpErrorMessage extends VlElement {
   async getTitle() {
