@@ -7,7 +7,7 @@
   <script src="../../../web-component-tester/browser.js"></script>
   <script src="/node_modules/sinon/pkg/sinon.js"></script>
 
-  <script type="module" src="../../src/vl-http-error-message.js"></script>
+  <script type="module" src="../../src/vl-http-error-message-all.js"></script>
 </head>
 
 <body>
@@ -20,9 +20,81 @@
     </template>
   </test-fixture>
 
+  <test-fixture id="vl-http-400-message-fixture">
+    <template>
+      <vl-http-404-message></vl-http-404-message>
+    </template>
+  </test-fixture>
+
+  <test-fixture id="vl-http-401-message-fixture">
+    <template>
+      <vl-http-401-message></vl-http-401-message>
+    </template>
+  </test-fixture>
+
+  <test-fixture id="vl-http-402-message-fixture">
+    <template>
+      <vl-http-402-message></vl-http-402-message>
+    </template>
+  </test-fixture>
+
+  <test-fixture id="vl-http-403-message-fixture">
+    <template>
+      <vl-http-403-message></vl-http-403-message>
+    </template>
+  </test-fixture>
+
   <test-fixture id="vl-http-404-message-fixture">
     <template>
       <vl-http-404-message></vl-http-404-message>
+    </template>
+  </test-fixture>
+
+  <test-fixture id="vl-http-405-message-fixture">
+    <template>
+      <vl-http-405-message></vl-http-405-message>
+    </template>
+  </test-fixture>
+
+  <test-fixture id="vl-http-408-message-fixture">
+    <template>
+      <vl-http-408-message></vl-http-408-message>
+    </template>
+  </test-fixture>
+
+  <test-fixture id="vl-http-410-message-fixture">
+    <template>
+      <vl-http-410-message></vl-http-410-message>
+    </template>
+  </test-fixture>
+
+  <test-fixture id="vl-http-411-message-fixture">
+    <template>
+      <vl-http-411-message></vl-http-411-message>
+    </template>
+  </test-fixture>
+
+  <test-fixture id="vl-http-412-message-fixture">
+    <template>
+      <vl-http-412-message></vl-http-412-message>
+    </template>
+  </test-fixture>
+
+  <test-fixture id="vl-http-413-message-fixture">
+    <template>
+      <vl-http-413-message></vl-http-413-message>
+    </template>
+  </test-fixture>
+
+  <test-fixture id="vl-http-414-message-fixture">
+    <template>
+      <vl-http-414-message></vl-http-414-message>
+    </template>
+  </test-fixture>
+
+  <test-fixture id="vl-http-415-message-fixture">
+    <template>
+      <vl-http-415-message></vl-http-415-message>
     </template>
   </test-fixture>
 
@@ -32,23 +104,44 @@
     </template>
   </test-fixture>
 
-  <test-fixture id="vl-http-500-message-slot-fixture">
+  <test-fixture id="vl-http-501-message-fixture">
     <template>
-      <vl-http-500-message>
-        <div slot="actions">
-          <span>Knop</span>
-        </div>
-      </vl-http-500-message>
+      <vl-http-501-message></vl-http-501-message>
+    </template>
+  </test-fixture>
+
+  <test-fixture id="vl-http-502-message-fixture">
+    <template>
+      <vl-http-502-message></vl-http-502-message>
+    </template>
+  </test-fixture>
+
+  <test-fixture id="vl-http-503-message-fixture">
+    <template>
+      <vl-http-503-message></vl-http-503-message>
+    </template>
+  </test-fixture>
+
+  <test-fixture id="vl-http-504-message-fixture">
+    <template>
+      <vl-http-504-message></vl-http-504-message>
+    </template>
+  </test-fixture>
+
+  <test-fixture id="vl-http-505-message-fixture">
+    <template>
+      <vl-http-505-message></vl-http-505-message>
+    </template>
+  </test-fixture>
+
+  <test-fixture id="vl-http-506-message-fixture">
+    <template>
+      <vl-http-506-message></vl-http-506-message>
     </template>
   </test-fixture>
 
   <script type="module">
     import {awaitUntil} from 'vl-ui-core/dist/vl-core';
-    const sandbox = sinon.createSandbox();
-
-    teardown(() => {
-      sandbox.restore();
-    });
 
     const assertWithElements = (fixture, assert) => {
       const message = fixture;
@@ -117,64 +210,43 @@
       });
     });
 
-    suite('vl-http-404-message', () => {
-      test('configureert de juiste tekst, afbeeldingen en acties by default', () => {
-        assertWithElements(fixture('vl-http-404-message-fixture'), ({title, text, action, smallImage, normalImage}) => {
-          assert.equal(title.textContent, 'Oeps, die pagina vonden we niet terug');
-          assert.equal(text.textContent, 'De pagina die u zoekt, vonden we niet terug.');
+    suite('vl-http-message', () => {
+      test('configureert de juiste tekst en afbeeldingen', () => {
+        [400, 401, 403, 404, 405, 408, 410, 411, 412, 413, 414, 415, 500, 501, 502, 503, 504, 505, 506].forEach((code) => {
+          assertWithElements(fixture(`vl-http-${code}-message-fixture`), ({title, text, smallImage, normalImage}) => {
+            assert.isDefined(title.textContent);
+            assert.isDefined(text.textContent);
+    
+            assert.include(smallImage.getAttribute('src'), 'https://cdn.milieuinfo.be/http-error-message-assets/LATEST/img/');
+            assert.isDefined(smallImage.alt);
 
-          const link = action.querySelector('a');
-          assert.equal(link.getAttribute('href'), '/');
-          assert.equal(link.textContent, 'Terug naar de startpagina');
-
-          assert.equal(smallImage.getAttribute('src'), 'https://cdn.milieuinfo.be/http-error-message-assets/LATEST/img/page-not-found.svg');
-          assert.equal(smallImage.alt, 'Pagina niet gevonden');
-
-          assert.equal(normalImage.getAttribute('src'), 'https://cdn.milieuinfo.be/http-error-message-assets/LATEST/img/page-not-found.svg');
-          assert.equal(normalImage.alt, 'Pagina niet gevonden');
-        });
-      });
-
-      test('configureert de juiste tekst, afbeeldingen en acties na overschrijving van de default waarden', () => {
-        assertConfig(fixture('vl-http-404-message-fixture'));
-      });
-    });
-
-    suite('vl-http-500-message', () => {
-      test('configureert de juiste tekst, afbeeldingen en acties by default', () => {
-        assertWithElements(fixture('vl-http-500-message-fixture'), ({title, text, action, smallImage, normalImage}) => {
-          assert.equal(title.textContent, 'Oeps, er is iets fout gelopen');
-          assert.equal(text.textContent, 'De actie die u heeft uitgevoerd is fout gelopen. Gelieve opnieuw te proberen.');
-
-          assert.isFalse(action.hasAttribute('href'));
-          assert.equal(action.textContent, 'Terug naar de pagina');
-
-          assert.equal(smallImage.getAttribute('src'), 'https://cdn.milieuinfo.be/http-error-message-assets/LATEST/img/unexpected-error.svg');
-          assert.equal(smallImage.alt, 'Onverwachte fout');
-
-          assert.equal(normalImage.getAttribute('src'), 'https://cdn.milieuinfo.be/http-error-message-assets/LATEST/img/unexpected-error.svg');
-          assert.equal(normalImage.alt, 'Onverwachte fout');
-        });
-      });
-
-      test('configureert de juiste tekst, afbeeldingen en acties na overschrijving van de default waarden', () => {
-        assertConfig(fixture('vl-http-500-message-fixture'));
-      });
-
-      test('een klik op de actie knop zal naar de vorige pagina gaan', (done) => {
-        const fixtures = [fixture('vl-http-500-message-fixture'), fixture('vl-http-500-message-slot-fixture')];
-        fixtures.forEach((fixture, index) => {
-          sandbox.restore();
-          assertWithElements(fixture, ({action}) => {
-            sandbox.stub(window.history, 'back');
-            action.addEventListener('click', () => {
-              assert(window.history.back.called);
-              if ((index+1) == fixtures.length) {
-                done();
-              }
-            });
-            action.click();
+            assert.include(normalImage.getAttribute('src'), 'https://cdn.milieuinfo.be/http-error-message-assets/LATEST/img/');
+            assert.isDefined(normalImage.alt);
           });
+        });
+      });
+
+      test('configureert de juiste tekst, afbeeldingen en acties na overschrijving van de default waarden', () => {
+        [400, 401, 403, 404, 405, 408, 410, 411, 412, 413, 414, 415, 500, 501, 502, 503, 504, 505, 506].forEach((code) => {
+          assertConfig(fixture(`vl-http-${code}-message-fixture`));
+        });
+      });
+
+      test('errors bevatten een link om terug te gaan naar de startpagina', () => {
+        [400, 401, 403, 404, 405, 408, 410, 411, 412, 413, 414, 415, 501, 502, 503, 504, 505, 506].forEach((code) => {
+          assertWithElements(fixture(`vl-http-${code}-message-fixture`), ({action}) => {
+            const link = action.querySelector('a');
+            assert.equal(link.getAttribute('href'), '/');
+            assert.equal(link.textContent, 'Terug naar de startpagina');
+          });
+        });
+      });
+
+      test('500 error bevat een link om terug te gaan naar de vorige pagina', () => {
+        assertWithElements(fixture(`vl-http-500-message-fixture`), ({action}) => {
+          const link = action.querySelector('a');
+          assert.include(link.getAttribute('href'), 'http://localhost:8081/components/vl-ui-http-error-message/');
+          assert.equal(link.textContent, 'Terug naar de pagina');
         });
       });
     });

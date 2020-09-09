@@ -197,35 +197,3 @@ export class VlHttpErrorMessage extends vlElement(HTMLElement) {
 }
 
 define('vl-http-error-message', VlHttpErrorMessage);
-define('vl-http-404-message', class extends VlHttpErrorMessage {
-  constructor() {
-    super({
-      title: 'Oeps, die pagina vonden we niet terug',
-      image: 'https://cdn.milieuinfo.be/http-error-message-assets/LATEST/img/page-not-found.svg',
-      imageAlt: 'Pagina niet gevonden',
-      text: `<p>De pagina die u zoekt, vonden we niet terug.</p>`,
-      actions: `<a is="vl-link-button" href="/">Terug naar de startpagina</a>`,
-    });
-  }
-});
-
-define('vl-http-500-message', class extends VlHttpErrorMessage {
-  constructor() {
-    super({
-      title: 'Oeps, er is iets fout gelopen',
-      image: 'https://cdn.milieuinfo.be/http-error-message-assets/LATEST/img/unexpected-error.svg',
-      imageAlt: 'Onverwachte fout',
-      text: `<p>De actie die u heeft uitgevoerd is fout gelopen. Gelieve opnieuw te proberen.</p>`,
-      actions: `<a is="vl-link-button">Terug naar de pagina</a>`,
-    });
-  }
-
-  connectedCallback() {
-    super.connectedCallback();
-    this._registerBackLink();
-  }
-
-  _registerBackLink() {
-    this.__actionElement.addEventListener('click', () => window.history.back());
-  }
-});
