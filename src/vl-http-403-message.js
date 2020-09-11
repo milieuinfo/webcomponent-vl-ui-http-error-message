@@ -7,7 +7,7 @@ define('vl-http-403-message', class extends VlHttpErrorMessage {
       title: 'Sorry, de toegang werd geweigerd',
       image: 'https://cdn.milieuinfo.be/http-error-message-assets/LATEST/img/unexpected-error.svg',
       imageAlt: 'Onvoldoende rechten',
-      text: `<p>Voor het verzoek dat u heeft gedaan, heeft u niet voldoende rechten.</p>`,
+      text: `<p>Voor het verzoek dat u heeft gedaan, heeft u niet voldoende rechten. <a href="mailto:help@omgevingvlaanderen.be?subject=HTTP-code 403">Mail de helpdesk</a> zodat we u kunnen verderhelpen. Vermeld daarbij het adres hierboven en de fout code 403.</p>`,
       actions: `<a is="vl-link-button" href="/">Terug naar de startpagina</a>`,
     });
   }
