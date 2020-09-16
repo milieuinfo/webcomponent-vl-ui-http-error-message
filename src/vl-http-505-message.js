@@ -4,10 +4,10 @@ import {VlHttpErrorMessage} from '/src/vl-http-error-message.js';
 define('vl-http-505-message', class extends VlHttpErrorMessage {
   constructor() {
     super({
-      title: 'Sorry, niet ondersteunde HTTP versie',
+      title: 'HTTP-versie niet ondersteund',
       image: 'https://cdn.milieuinfo.be/http-error-message-assets/LATEST/img/unexpected-error.svg',
       imageAlt: 'Niet ondersteunde HTTP versie',
-      text: `<p>Uw verzoek is gebeurd met een HTTP versie die niet ondersteund wordt door de server. Vragen? <a href="mailto:help@omgevingvlaanderen.be?subject=HTTP-code 505">Mail de helpdesk</a> zodat we u kunnen verderhelpen. Vermeld daarbij het adres hierboven en de fout code 505. Onze excuses voor het ongemak.</p>`,
+      text: `<p>De HTTP-versie van uw verzoek wordt niet ondersteund door onze server. <a href="mailto:help@omgevingvlaanderen.be?subject=HTTP-code 505">Mail de helpdesk</a> en vermeld daarbij de URL hierboven en de foutcode 505.</p>`,
       actions: `<a is="vl-link-button" href="/">Terug naar de startpagina</a>`,
     });
   }
