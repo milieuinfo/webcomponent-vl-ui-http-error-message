@@ -4,10 +4,10 @@ import {VlHttpErrorMessage} from '/node_modules/vl-ui-http-error-message/dist/vl
 define('vl-http-500-message', class extends VlHttpErrorMessage {
   constructor() {
     super({
-      title: 'Oeps, er is iets fout gelopen',
+      title: 'Interne fout',
       image: 'https://cdn.milieuinfo.be/http-error-message-assets/LATEST/img/unexpected-error.svg',
       imageAlt: 'Onverwachte fout',
-      text: `<p>Uw verzoek is fout gelopen. Gelieve opnieuw te proberen. Vragen? <a href="mailto:help@omgevingvlaanderen.be?subject=HTTP-code 500">Mail de helpdesk</a> zodat we u kunnen verderhelpen. Vermeld daarbij het adres hierboven en de fout code 500. Onze excuses voor het ongemak.</p>`,
+      text: `<p>Er ging iets fout. Probeer het nog eens. Lukt het nog niet, <a href="mailto:help@omgevingvlaanderen.be?subject=HTTP-code 500">mail dan de helpdesk</a> en vermeld daarbij de URL hierboven en de foutcode 500.</p>`,
       actions: `<a is="vl-link-button" href="${document.referrer}">Terug naar de pagina</a>`,
     });
   }

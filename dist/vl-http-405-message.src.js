@@ -4,10 +4,10 @@ import {VlHttpErrorMessage} from 'vl-ui-http-error-message/dist/vl-http-error-me
 define('vl-http-405-message', class extends VlHttpErrorMessage {
   constructor() {
     super({
-      title: 'Sorry, verzoek werd niet toegelaten',
+      title: 'Niet toegelaten',
       image: 'https://cdn.milieuinfo.be/http-error-message-assets/LATEST/img/unexpected-error.svg',
       imageAlt: 'Niet toegelaten',
-      text: `<p>Uw verzoek werd niet toegelaten. <a href="mailto:help@omgevingvlaanderen.be?subject=HTTP-code 405">Mail de helpdesk</a> zodat we u kunnen verderhelpen. Vermeld daarbij het adres hierboven en de fout code 405.</p>`,
+      text: `<p>Er ging iets fout. <a href="mailto:help@omgevingvlaanderen.be?subject=HTTP-code 405">Mail de helpdesk</a> en vermeld daarbij de URL hierboven en de foutcode 405.</p>`,
       actions: `<a is="vl-link-button" href="/">Terug naar de startpagina</a>`,
     });
   }

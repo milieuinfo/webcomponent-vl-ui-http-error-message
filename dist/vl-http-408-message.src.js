@@ -4,10 +4,11 @@ import {VlHttpErrorMessage} from 'vl-ui-http-error-message/dist/vl-http-error-me
 define('vl-http-408-message', class extends VlHttpErrorMessage {
   constructor() {
     super({
-      title: 'Oeps, dat duurde iets te lang',
+      title: 'Oeps, dat duurde te lang',
       image: 'https://cdn.milieuinfo.be/http-error-message-assets/LATEST/img/unexpected-error.svg',
       imageAlt: 'Verzoek duurt te lang',
-      text: `<p>Uw verzoek duurde te lang en werd gestopt. Geen paniek, u kunt de pagina opnieuw opvragen. Blijft deze boodschap verschijnen? <a href="mailto:help@omgevingvlaanderen.be?subject=HTTP-code 408">Mail dan de helpdesk</a> zodat we u kunnen verderhelpen. Vermeld daarbij het adres hierboven en de fout code 408.</p>`,
+      text: `<p>Het laden van de pagina duurde te lang. Probeer het opnieuw en als het nog niet lukt: <a href="mailto:help@omgevingvlaanderen.be?subject=HTTP-code 408">mail dan de helpdesk</a> en vermeld daarbij de URL hierboven en de foutcode 408.
+      </p>`,
       actions: `<a is="vl-link-button" href="/">Terug naar de startpagina</a>`,
     });
   }
