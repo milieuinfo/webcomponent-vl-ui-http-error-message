@@ -245,7 +245,7 @@
       test('500 error bevat een link om terug te gaan naar de vorige pagina', () => {
         assertWithElements(fixture(`vl-http-500-message-fixture`), ({action}) => {
           const link = action.querySelector('a');
-          assert.include(link.getAttribute('href'), 'http://localhost:8081/components/vl-ui-http-error-message/');
+          assert.include(link.getAttribute('href'), '/components/vl-ui-http-error-message/');
           assert.equal(link.textContent, 'Terug naar de pagina');
         });
       });
