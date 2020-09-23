@@ -21,10 +21,10 @@ describe('vl-http-error-message', async () => {
 
   it('als gebruiker kan ik de foutmelding content lezen', async () => {
     let message = await vlHttpErrorMessagePage.get404();
-    await assert.eventually.equal(message.getContent(), '<p>We vonden de pagina niet terug. Controleer even of u een tikfout heeft gemaakt. Bent u via een link of website op deze pagina gekomen. <a href="mailto:help@omgevingvlaanderen.be?subject=HTTP-code 404">Mail dan de helpdesk</a> en vermeld daarbij de URL hierboven en de foutcode 404.</p>');
+    await assert.eventually.equal(message.getContent(), 'We vonden de pagina niet terug. Controleer even of u een tikfout heeft gemaakt. Bent u via een link of website op deze pagina gekomen. Mail dan de helpdesk en vermeld daarbij de URL hierboven en de foutcode 404.');
 
     message = await vlHttpErrorMessagePage.get500();
-    await assert.eventually.equal(message.getContent(), '<p>Er ging iets fout. Probeer het nog eens. Lukt het nog niet, <a href="mailto:help@omgevingvlaanderen.be?subject=HTTP-code 500">mail dan de helpdesk</a> en vermeld daarbij de URL hierboven en de foutcode 500.</p>');
+    await assert.eventually.equal(message.getContent(), 'Er ging iets fout. Probeer het nog eens. Lukt het nog niet, mail dan de helpdesk en vermeld daarbij de URL hierboven en de foutcode 500.');
 
     message = await vlHttpErrorMessagePage.getCustomErrorMessage();
     await assert.eventually.equal(message.getContent(), 'Sorry, er liep iets onverwachts mis.');
@@ -73,7 +73,7 @@ describe('vl-http-error-message', async () => {
     httpErrorMessage = await vlHttpErrorMessagePage.get500();
     await httpErrorMessage.clickOnAction();
     urlAfterClick = await driver.getCurrentUrl();
-    assert.isTrue(urlAfterClick.endsWith('/'));
+    assert.isTrue(urlAfterClick.endsWith('/demo/vl-http-error-message.html?no-header=true&no-footer=true'));
 
     await vlHttpErrorMessagePage.load();
     httpErrorMessage = await vlHttpErrorMessagePage.getCustomErrorMessage();
