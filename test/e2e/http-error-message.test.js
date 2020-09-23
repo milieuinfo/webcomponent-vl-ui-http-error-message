@@ -10,10 +10,10 @@ describe('vl-http-error-message', async () => {
 
   it('als gebruiker kan ik de foutmelding titel lezen', async () => {
     let message = await vlHttpErrorMessagePage.get404();
-    await assert.eventually.equal(message.getTitle(), 'Oeps, die pagina vonden we niet terug');
+    await assert.eventually.equal(message.getTitle(), 'Pagina niet gevonden');
 
     message = await vlHttpErrorMessagePage.get500();
-    await assert.eventually.equal(message.getTitle(), 'Oeps, er is iets fout gelopen');
+    await assert.eventually.equal(message.getTitle(), 'Interne fout');
 
     message = await vlHttpErrorMessagePage.getCustomErrorMessage();
     await assert.eventually.equal(message.getTitle(), 'Niets gevonden hiervoor.');
@@ -21,10 +21,10 @@ describe('vl-http-error-message', async () => {
 
   it('als gebruiker kan ik de foutmelding content lezen', async () => {
     let message = await vlHttpErrorMessagePage.get404();
-    await assert.eventually.equal(message.getContent(), 'De pagina die u zoekt, vonden we niet terug.');
+    await assert.eventually.equal(message.getContent(), '<p>We vonden de pagina niet terug. Controleer even of u een tikfout heeft gemaakt. Bent u via een link of website op deze pagina gekomen. <a href="mailto:help@omgevingvlaanderen.be?subject=HTTP-code 404">Mail dan de helpdesk</a> en vermeld daarbij de URL hierboven en de foutcode 404.</p>');
 
     message = await vlHttpErrorMessagePage.get500();
-    await assert.eventually.equal(message.getContent(), 'De actie die u heeft uitgevoerd is fout gelopen. Gelieve opnieuw te proberen.');
+    await assert.eventually.equal(message.getContent(), '<p>Er ging iets fout. Probeer het nog eens. Lukt het nog niet, <a href="mailto:help@omgevingvlaanderen.be?subject=HTTP-code 500">mail dan de helpdesk</a> en vermeld daarbij de URL hierboven en de foutcode 500.</p>');
 
     message = await vlHttpErrorMessagePage.getCustomErrorMessage();
     await assert.eventually.equal(message.getContent(), 'Sorry, er liep iets onverwachts mis.');
