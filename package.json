@@ -1,6 +1,6 @@
 {
   "name": "vl-ui-http-error-message",
-  "version": "3.2.0",
+  "version": "3.2.1",
   "description": "Toont een HTTP foutmelding aan de gebruiker op een gebruiksvriendelijke manier.",
   "author": "DIDM",
   "license": "MIT",
