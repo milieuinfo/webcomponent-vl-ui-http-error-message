@@ -9,7 +9,7 @@ $ npm install --save vl-ui-http-error-message
 ```
 
 ## API
-De [API](https://webcomponenten.omgeving.vlaanderen.be/doc/VlHttpErrorMessage.html) bevat een overzicht van de ondersteunde attributen en een beschrijving van de beschikbare functies.
+De [API](https://webcomponenten.omgeving.vlaanderen.be/doc/VlHttp-error-message.html) bevat een overzicht van de ondersteunde attributen en een beschrijving van de beschikbare functies.
 
 ## Demo
 De [demo](https://webcomponenten.omgeving.vlaanderen.be/demo/vl-http-error-message.html) pagina bevat een overzicht van de mogelijkheden met code voorbeelden. Lokaal opstarten kan met onderstaand [NPM](https://www.npmjs.com) script.
