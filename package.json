@@ -38,14 +38,14 @@
   },
   "dependencies": {
     "vl-ui-button": "^5.0.6",
-    "vl-ui-core": "^6.2.3",
+    "vl-ui-core": "^7.0.0",
     "vl-ui-grid": "^3.1.4",
     "vl-ui-titles": "^3.0.6",
     "vl-ui-typography": "^3.1.1"
   },
   "peerDependencies": {
     "vl-ui-button": "^5.0.6",
-    "vl-ui-core": "^6.0.0",
+    "vl-ui-core": "^7.0.0",
     "vl-ui-grid": "^3.1.4",
     "vl-ui-titles": "^3.0.6",
     "vl-ui-typography": "^3.1.1"
