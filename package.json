@@ -30,29 +30,29 @@
     "test:unit": "npm explore vl-ui-util -- npm run test:component:unit",
     "test:unit:grid": "npm explore vl-ui-util -- npm run test:component:unit:grid",
     "test:e2e": "npm explore vl-ui-util -- npm run test:component:e2e",
-    "test:e2e:grid": "npm explore vl-ui-util -- npm run test:component:e2e:grid",
+    "test:e2e:grid": "npm explore vl-ui-util -- npm run test:component:e2e:browserstack",
     "release": "npm explore vl-ui-util -- npm run release",
     "release:prepare": "npm explore vl-ui-util -- npm run release-component:prepare $(pwd) http-error-message",
     "release:testless": "np --yolo",
     "demo": "http-server"
   },
   "dependencies": {
-    "vl-ui-button": "^5.0.6",
-    "vl-ui-core": "^6.2.3",
-    "vl-ui-grid": "^3.1.4",
-    "vl-ui-titles": "^3.0.6",
-    "vl-ui-typography": "^3.1.1"
+    "vl-ui-button": "^5.0.8",
+    "vl-ui-core": "^7.0.1",
+    "vl-ui-grid": "^3.1.6",
+    "vl-ui-titles": "^3.0.8",
+    "vl-ui-typography": "^3.1.3"
   },
   "peerDependencies": {
-    "vl-ui-button": "^5.0.6",
-    "vl-ui-core": "^6.0.0",
-    "vl-ui-grid": "^3.1.4",
-    "vl-ui-titles": "^3.0.6",
-    "vl-ui-typography": "^3.1.1"
+    "vl-ui-button": "^5.0.8",
+    "vl-ui-core": "^7.0.1",
+    "vl-ui-grid": "^3.1.6",
+    "vl-ui-titles": "^3.0.8",
+    "vl-ui-typography": "^3.1.3"
   },
   "devDependencies": {
-    "@govflanders/vl-ui-util": "^3.11.5",
-    "vl-ui-body": "^1.0.5",
-    "vl-ui-util": "^5.3.1"
+    "@govflanders/vl-ui-util": "^3.12.3",
+    "vl-ui-body": "^1.0.7",
+    "vl-ui-util": "^5.3.3"
   }
 }
