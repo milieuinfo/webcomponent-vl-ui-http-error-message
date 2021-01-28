@@ -1,3 +1,1 @@
-module.exports = {
-  VlHttpErrorMessage: require('../dist/vl-http-error-message-all.src.js').VlHttpErrorMessage,
-};
+export * from '../dist/vl-http-error-message-all.src.js';
