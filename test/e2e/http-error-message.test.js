@@ -4,6 +4,7 @@ const VlHttpErrorMessagePage = require('./pages/vl-http-error-message.page');
 describe('vl-http-error-message', async () => {
   let driver;
   let vlHttpErrorMessagePage;
+  const types = [400, 401, 403, 404, 405, 408, 410, 411, 412, 413, 414, 415, 500, 501, 502, 503, 504, 505, 506, 'custom'];
 
   beforeEach(() => {
     driver = getDriver();
@@ -11,77 +12,121 @@ describe('vl-http-error-message', async () => {
     return vlHttpErrorMessagePage.load();
   });
 
+  const forAllTypes = async (callback) => {
+    for (const i in types) {
+      if (i && types[i]) {
+        await callback(types[i]);
+      }
+    }
+  };
+
+  it('WCAG', async () => {
+    await forAllTypes(async (type) => {
+      await vlHttpErrorMessagePage.load(type);
+      const httpErrorMessage = await vlHttpErrorMessagePage.getError();
+      await assert.eventually.isDefined(httpErrorMessage.getTitle());
+      await assert.eventually.isFalse(vlHttpErrorMessagePage.hasWcagIssues());
+    });
+  }).timeout(50000);
+
   it('als gebruiker kan ik de foutmelding titel lezen', async () => {
-    let message = await vlHttpErrorMessagePage.get404();
-    await assert.eventually.equal(message.getTitle(), 'Pagina niet gevonden');
-
-    message = await vlHttpErrorMessagePage.get500();
-    await assert.eventually.equal(message.getTitle(), 'Interne fout');
-
-    message = await vlHttpErrorMessagePage.getCustomErrorMessage();
-    await assert.eventually.equal(message.getTitle(), 'Niets gevonden hiervoor.');
+    await forAllTypes(async (type) => {
+      await vlHttpErrorMessagePage.load(type);
+      const httpErrorMessage = await vlHttpErrorMessagePage.getError();
+      await assert.eventually.isDefined(httpErrorMessage.getTitle());
+    });
   });
 
   it('als gebruiker kan ik de foutmelding content lezen', async () => {
-    let message = await vlHttpErrorMessagePage.get404();
-    await assert.eventually.equal(message.getContent(), 'We vonden de pagina niet terug. Controleer even of u een tikfout heeft gemaakt. Bent u via een link of website op deze pagina gekomen. Mail dan de helpdesk en vermeld daarbij de URL hierboven en de foutcode 404.');
-
-    message = await vlHttpErrorMessagePage.get500();
-    await assert.eventually.equal(message.getContent(), 'Er ging iets fout. Probeer het nog eens. Lukt het nog niet, mail dan de helpdesk en vermeld daarbij de URL hierboven en de foutcode 500.');
-
-    message = await vlHttpErrorMessagePage.getCustomErrorMessage();
-    await assert.eventually.equal(message.getContent(), 'Sorry, er liep iets onverwachts mis.');
+    await forAllTypes(async (type) => {
+      await vlHttpErrorMessagePage.load(type);
+      const httpErrorMessage = await vlHttpErrorMessagePage.getError();
+      await assert.eventually.isDefined(httpErrorMessage.getContent());
+    });
   });
 
   it('als gebruiker kan ik de foutmelding link zien', async () => {
-    let httpErrorMessage = await vlHttpErrorMessagePage.get404();
-    let link = await httpErrorMessage._getAction();
-    await assert.eventually.equal(link.getText(), 'Terug naar de startpagina');
-
-    httpErrorMessage = await vlHttpErrorMessagePage.get500();
-    link = await httpErrorMessage._getAction();
-    await assert.eventually.equal(link.getText(), 'Terug naar de pagina');
-
-    httpErrorMessage = await vlHttpErrorMessagePage.getCustomErrorMessage();
-    link = await httpErrorMessage._getAction();
-    await assert.eventually.equal(link.getText(), 'Opnieuw opstarten');
+    await forAllTypes(async (type) => {
+      await vlHttpErrorMessagePage.load(type);
+      const httpErrorMessage = await vlHttpErrorMessagePage.getError();
+      const link = await httpErrorMessage._getAction();
+      await assert.eventually.isDefined(link.getText());
+    });
   });
 
   it('als gebruiker kan ik de foutmelding afbeelding zien', async () => {
-    let httpErrorMessage = await vlHttpErrorMessagePage.get404();
-    let image = await httpErrorMessage.getImage();
-    await assert.eventually.equal(image.getAttribute('src'), 'https://cdn.milieuinfo.be/http-error-message-assets/LATEST/img/page-not-found.svg');
-    await assert.eventually.equal(image.getAttribute('alt'), 'Pagina niet gevonden');
+    const getImgSrc = (type) => {
+      switch (type) {
+        case 400:
+        case 401:
+        case 403:
+        case 405:
+        case 408:
+        case 411:
+        case 412:
+        case 413:
+        case 414:
+        case 415:
+        case 500:
+        case 501:
+        case 502:
+        case 503:
+        case 504:
+        case 505:
+        case 506:
+          return '/unexpected-error.svg';
+        case 404:
+        case 410:
+          return '/page-not-found.svg';
+        case 'custom':
+          return '/error-404.png';
+      }
+    };
 
-    httpErrorMessage = await vlHttpErrorMessagePage.get500();
-    image = await httpErrorMessage.getImage();
-    await assert.eventually.equal(image.getAttribute('src'), 'https://cdn.milieuinfo.be/http-error-message-assets/LATEST/img/unexpected-error.svg');
-    await assert.eventually.equal(image.getAttribute('alt'), 'Onverwachte fout');
-
-    httpErrorMessage = await vlHttpErrorMessagePage.getCustomErrorMessage();
-    image = await httpErrorMessage.getImage();
-    assert.isTrue((await image.getAttribute('src')).endsWith('demo/error-404.png'));
-    await assert.eventually.equal(image.getAttribute('alt'), 'Niets gevonden');
+    await forAllTypes(async (type) => {
+      await vlHttpErrorMessagePage.load(type);
+      const httpErrorMessage = await vlHttpErrorMessagePage.getError();
+      const image = await httpErrorMessage.getImage();
+      await assert.isTrue((await image.getAttribute('src')).endsWith(getImgSrc(type)));
+      await assert.eventually.equal(image.getAttribute('alt'), '');
+    });
   });
 
-  it('als gebruiker kan ik op de actieknop van een 404 foutmelding klikken om naar de startpagina te gaan', async () => {
-    const originalUrl = await driver.getCurrentUrl();
-    assert.isFalse(originalUrl.endsWith('/'));
-    let httpErrorMessage = await vlHttpErrorMessagePage.get404();
-    await httpErrorMessage.clickOnAction();
-    let urlAfterClick = await driver.getCurrentUrl();
-    assert.isTrue(urlAfterClick.endsWith('/'));
+  it('als gebruiker kan ik op de actieknop van een foutmelding klikken om naar de startpagina te gaan', async () => {
+    const getPath = (type) => {
+      switch (type) {
+        case 400:
+        case 401:
+        case 403:
+        case 404:
+        case 405:
+        case 408:
+        case 410:
+        case 411:
+        case 412:
+        case 413:
+        case 414:
+        case 415:
+        case 501:
+        case 502:
+        case 503:
+        case 504:
+        case 505:
+        case 506:
+          return '/';
+        case 500:
+          return '/demo/vl-http-500-message.html?no-header=true&no-footer=true';
+        case 'custom':
+          return '#demo';
+      }
+    };
 
-    await vlHttpErrorMessagePage.load();
-    httpErrorMessage = await vlHttpErrorMessagePage.get500();
-    await httpErrorMessage.clickOnAction();
-    urlAfterClick = await driver.getCurrentUrl();
-    assert.isTrue(urlAfterClick.endsWith('/demo/vl-http-error-message.html?no-header=true&no-footer=true'));
-
-    await vlHttpErrorMessagePage.load();
-    httpErrorMessage = await vlHttpErrorMessagePage.getCustomErrorMessage();
-    await httpErrorMessage.clickOnAction();
-    urlAfterClick = await driver.getCurrentUrl();
-    assert.isTrue(urlAfterClick.endsWith('#demo'));
+    await forAllTypes(async (type) => {
+      await vlHttpErrorMessagePage.load(type);
+      const httpErrorMessage = await vlHttpErrorMessagePage.getError();
+      await httpErrorMessage.clickOnAction();
+      const urlAfterClick = await driver.getCurrentUrl();
+      assert.isTrue(urlAfterClick.endsWith(getPath(type)));
+    });
   });
 });
