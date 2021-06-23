@@ -23,6 +23,8 @@ describe('vl-http-error-message', async () => {
   it('WCAG', async () => {
     await forAllTypes(async (type) => {
       await vlHttpErrorMessagePage.load(type);
+      const httpErrorMessage = await vlHttpErrorMessagePage.getError();
+      await assert.eventually.isDefined(httpErrorMessage.getTitle());
       await assert.eventually.isFalse(vlHttpErrorMessagePage.hasWcagIssues());
     });
   }).timeout(50000);

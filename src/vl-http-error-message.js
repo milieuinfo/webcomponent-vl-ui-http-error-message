@@ -42,7 +42,7 @@ export class VlHttpErrorMessage extends vlElement(HTMLElement) {
       <div is="vl-grid" data-vl-is-stacked data-vl-align-center data-vl-v-center>
         <div is="vl-column" data-vl-size="6" data-vl-medium-size="6" data-vl-small-size="6" data-vl-extra-small-size="6" class="vl-u-hidden vl-u-visible--s">
           <div class="vl-u-display-flex vl-u-flex-align-center vl-u-flex-v-center">
-            <img id="image-small" role="img" title="Foutmelding illustratie"/>
+            <img id="image-small" role="img"/>
           </div>
         </div>
         <div is="vl-column" data-vl-size="6" data-vl-medium-size="6" data-vl-small-size="8">
@@ -56,7 +56,7 @@ export class VlHttpErrorMessage extends vlElement(HTMLElement) {
         </div>
         <div is="vl-column" data-vl-size="6" data-vl-medium-size="6" data-vl-small-size="6" class="vl-u-hidden--s">
           <div class="vl-u-display-flex vl-u-flex-align-center vl-u-flex-v-center">
-            <img id="image-normal" role="img" title="Foutmelding illustratie"/>
+            <img id="image-normal" role="img"/>
           </div>
         </div>
       </div>
